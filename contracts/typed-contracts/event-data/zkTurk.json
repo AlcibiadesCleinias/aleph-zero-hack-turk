@@ -1,0 +1,3 @@
+{
+"JoinProblem": {"name":"JoinProblem","body":{"problemId":{"name":"ReturnNumber","isResult":false,"isPrimitive":false,"isConvertable":true},"worker":{"name":"AccountId","body":"string | number[]","isResult":false,"isPrimitive":true,"isConvertable":false}},"isResult":false,"isPrimitive":false,"isConvertable":false}
+}
