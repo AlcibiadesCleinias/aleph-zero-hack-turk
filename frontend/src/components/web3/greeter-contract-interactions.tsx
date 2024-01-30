@@ -20,6 +20,8 @@ import { Form, FormControl, FormItem, FormLabel } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { contractTxWithToast } from '@/utils/contract-tx-with-toast'
 
+import { ContractClient } from './chainClient'
+
 type UpdateGreetingValues = { newMessage: string }
 
 export const GreeterContractInteractions: FC = () => {
@@ -39,14 +41,18 @@ export const GreeterContractInteractions: FC = () => {
 
     setFetchIsLoading(true)
     try {
-      const result = await contractQuery(api, '', contract, 'greet')
-      const { output, isError, decodedOutput } = decodeOutput(result, contract, 'greet')
-      if (isError) throw new Error(decodedOutput)
-      setGreeterMessage(output)
+      // Use abstract class.
+      const contractClient = new ContractClient(
+        api,
+        activeAccount,
+        activeSigner,
+        typedContract,
+        contract,
+        contractAddress,
+      )
+      const output = await contractClient.fetchGreeting()
 
-      // Alternatively: Fetch it with typed contract instance
-      const typedResult = await typedContract.query.greet()
-      console.log('Result from typed contract: ', typedResult.value)
+      setGreeterMessage(output)
     } catch (e) {
       console.error(e)
       toast.error('Error while fetching greeting. Try again…')
@@ -69,9 +75,19 @@ export const GreeterContractInteractions: FC = () => {
     // Send transaction
     setUpdateIsLoading(true)
     try {
-      await contractTxWithToast(api, activeAccount.address, contract, 'setMessage', {}, [
-        newMessage,
-      ])
+      // Use abstract class.
+      // await contractTxWithToast(api, activeAccount.address, contract, 'setMessage', {}, [
+      //   newMessage,
+      // ])
+      const contractClient = new ContractClient(
+        api,
+        activeAccount,
+        activeSigner,
+        typedContract,
+        contract,
+        contractAddress,
+      )
+      await contractClient.updateGreeting(newMessage)
       reset()
     } catch (e) {
       console.error(e)
