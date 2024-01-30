@@ -1,3 +1,16 @@
+aleph-zero-hack-turk
+---
+DiD track 
+
+frontend: http://zk-task.why-nft.com/
+
+refs: 
+- https://ctrl-hack-zk.notion.site/CTRL-Hack-ZK-Dev-Quickstart-5241be2b33fa40418db403faa909e3a9
+- https://ctrl-hack-zk.notion.site/CTRL-Hack-ZK-Hacker-Manual-80ec8d80f6bf4ac3a9bd4b337e53b5f7
+- https://smartbeaver.io/
+- https://use.ink/macros-attributes/payable/
+- https://taikai.network/alephzero/hackathons/CTRL-Hack-ZK/projects/clrwkirrk01but501j86g25pf/idea
+
 ![inkathon Devtooling Banner](inkathon-devtooling-banner.png)
 
 # ink!athon Boilerplate
