@@ -9,7 +9,7 @@ import {
 } from '@scio-labs/use-inkathon/helpers'
 
 /**
- * Example script that updates & reads a message from a greeter contract.
+ * Example script that updates & reads a message from a zkTurk contract.
  * Can be used as a template for other scripts.
  *
  * Parameters:
@@ -23,8 +23,8 @@ import {
 const main = async () => {
   const { api, account } = await initPolkadotJs()
 
-  // Deploy greeter contract
-  const { abi, wasm } = await getDeploymentData('greeter')
+  // Deploy zkTurk contract
+  const { abi, wasm } = await getDeploymentData('zkTurk')
   const { address } = await deployContract(api, account, abi, wasm, 'default', [])
   const contract = new ContractPromise(api, abi, address)
 

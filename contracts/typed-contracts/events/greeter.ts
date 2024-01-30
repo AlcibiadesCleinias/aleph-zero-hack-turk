@@ -1,7 +1,7 @@
-import type * as EventTypes from '../event-types/greeter';
+import type * as EventTypes from '../event-types/zkTurk';
 import type {ContractPromise} from "@polkadot/api-contract";
 import type {ApiPromise} from "@polkadot/api";
-import EVENT_DATA_TYPE_DESCRIPTIONS from '../event-data/greeter.json';
+import EVENT_DATA_TYPE_DESCRIPTIONS from '../event-data/zkTurk.json';
 import {getEventTypeDescription} from "../shared/utils";
 import {handleEventReturn} from "@727-ventures/typechain-types";
 

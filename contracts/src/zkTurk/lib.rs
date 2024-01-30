@@ -9,20 +9,20 @@ pub use problemsData::{ProblemsData, PSP22Event};
 
 // ZkTurk Contract.
 #[ink::contract]
-mod greeter {
+mod zkTurk {
     use ink::prelude::string::String;
     use ink::storage::Mapping;
     use ink::prelude::vec::Vec;
     use crate::{ProblemsData, PSP22Event};
 
-    #[ink(event)]
-    pub struct Greeted {
-        from: Option<AccountId>,
-        message: String,
-    }
+//     #[ink(event)]
+//     pub struct Greeted {
+//         from: Option<AccountId>,
+//         message: String,
+//     }
 
     #[ink(storage)]
-    pub struct Greeter {
+    pub struct ZkTurk {
         message: String,
         pub problemFee: u128,
         pub problemStake: u128,
@@ -32,8 +32,8 @@ mod greeter {
 
     }
 
-    impl Greeter {
-        /// Creates a new greeter contract initialized with the given value.
+    impl ZkTurk {
+        /// Creates a new zkTurk contract initialized with the given value.
         #[ink(constructor)]
         pub fn new(
             init_value: String, 
@@ -48,23 +48,17 @@ mod greeter {
             }
         }
 
-        /// Returns the current value of `message`.
-        #[ink(message)]
-        pub fn greet(&self) -> String {
-            self.message.clone()
-        }
-
         /// Sets `message` to the given value.
-        #[ink(message)]
-        pub fn set_message(&mut self, new_value: String) {
-            self.message = new_value.clone();
-
-            let from = self.env().caller();
-            self.env().emit_event(Greeted {
-                from: Some(from),
-                message: new_value,
-            });
-        }
+//         #[ink(message)]
+//         pub fn set_message(&mut self, new_value: String) {
+//             self.message = new_value.clone();
+//
+//             let from = self.env().caller();
+//             self.env().emit_event(Greeted {
+//                 from: Some(from),
+//                 message: new_value,
+//             });
+//         }
 
         // TODO: impl ProblemCRUDInterface for ZkTurk {}
 

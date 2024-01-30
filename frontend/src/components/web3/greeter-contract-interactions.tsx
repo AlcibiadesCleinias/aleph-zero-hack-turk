@@ -3,7 +3,7 @@
 import { FC, useEffect, useState } from 'react'
 
 import { ContractIds } from '@/deployments/deployments'
-import GreeterContract from '@inkathon/contracts/typed-contracts/contracts/greeter'
+import GreeterContract from '@inkathon/contracts/typed-contracts/contracts/zkTurk'
 import {
   contractQuery,
   decodeOutput,
@@ -26,8 +26,8 @@ type UpdateGreetingValues = { newMessage: string }
 
 export const GreeterContractInteractions: FC = () => {
   const { api, activeAccount, activeSigner } = useInkathon()
-  const { contract, address: contractAddress } = useRegisteredContract(ContractIds.Greeter)
-  const { typedContract } = useRegisteredTypedContract(ContractIds.Greeter, GreeterContract)
+  const { contract, address: contractAddress } = useRegisteredContract(ContractIds.ZkTurk)
+  const { typedContract } = useRegisteredTypedContract(ContractIds.ZkTurk, GreeterContract)
   const [greeterMessage, setGreeterMessage] = useState<string>()
   const [fetchIsLoading, setFetchIsLoading] = useState<boolean>()
   const [updateIsLoading, setUpdateIsLoading] = useState<boolean>()
@@ -102,7 +102,7 @@ export const GreeterContractInteractions: FC = () => {
   return (
     <>
       <div className="flex max-w-[22rem] grow flex-col gap-4">
-        <h2 className="text-center font-mono text-gray-400">Greeter Smart Contract</h2>
+        <h2 className="text-center font-mono text-gray-400">ZkTurk Smart Contract</h2>
 
         <Form {...form}>
           {/* Fetched Greeting */}

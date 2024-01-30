@@ -50,7 +50,7 @@ Other projects include:
 
 ## About 📖
 
-The boilerplate comes with a small sample ink! `Greeter` contract which stores a `message` (the "greeting") and allows anyone to update it. The frontend contains simple UI components to connect your wallet and interact with the contract (i.e. read & write the `message`). Try it out live on [inkathon.xyz](https://inkathon.xyz).
+The boilerplate comes with a small sample ink! `ZkTurk` contract which stores a `message` (the "greeting") and allows anyone to update it. The frontend contains simple UI components to connect your wallet and interact with the contract (i.e. read & write the `message`). Try it out live on [inkathon.xyz](https://inkathon.xyz).
 
 ## Getting started 🚀
 
@@ -140,7 +140,7 @@ Additionally, there are the following un-highlighted occurrences:
 
 ### 2. Custom Contracts
 
-To replace the default `Greeter` contract or add a new one, you need to do the following:
+To replace the default `ZkTurk` contract or add a new one, you need to do the following:
 
 - Add a new contract directory under `contracts/src/`
 - Add it as another workspace member to the `contracts/Cargo.toml` file
@@ -224,7 +224,7 @@ All environment variables are imported from `process.env` in [`frontend/src/conf
 
 ### Contract Deployment
 
-In the [Getting Started](#getting-started) section above, we've already deployed the sample `Greeter` contract on a local node. To target a live network, we can use the `CHAIN` environment variable when running the `deploy` script.
+In the [Getting Started](#getting-started) section above, we've already deployed the sample `ZkTurk` contract on a local node. To target a live network, we can use the `CHAIN` environment variable when running the `deploy` script.
 
 ```bash
 CHAIN=alephzero-testnet pnpm run deploy
@@ -290,7 +290,7 @@ As an alternative, [yarn](https://yarnpkg.com/) is also supported and can be use
 </details>
 
 <details>
-<summary><strong>How to solve `Cannot find module './greeter/development.ts'`?</strong></summary>
+<summary><strong>How to solve `Cannot find module './zkTurk/development.ts'`?</strong></summary>
 
 Sometimes, Next.js doesn't pick up changes (i.e. file creations) in the `contracts/deployments/{contract}/` folders correctly. E.g., when you just deployed on a local node for the first time and set the frontend's `.env.local` to connect to the `development` network.
 
@@ -320,7 +320,7 @@ Currently it offers styling via the following options out of the box:
 
 With [`typechain-polkadot`](https://github.com/Brushfam/typechain-polkadot), types for each contract (TypeScript files) are created upon build (via the `build` script or `build-all.sh` command). You can suppress this behavior by passing `--skip-types`.
 
-They are stored under `contracts/typed-contracts/` and imported directly from the frontend. Then, via the new `useRegisteredTypedContract` hook from [`useInkathon`](https://github.com/scio-labs/use-inkathon) instances with pre-defined api, network-dependant contract address, and injected signer are being created. See `greeter-contract-interactions.tsx` for an example.
+They are stored under `contracts/typed-contracts/` and imported directly from the frontend. Then, via the new `useRegisteredTypedContract` hook from [`useInkathon`](https://github.com/scio-labs/use-inkathon) instances with pre-defined api, network-dependant contract address, and injected signer are being created. See `zkTurk-contract-interactions.tsx` for an example.
 
 </details>
 

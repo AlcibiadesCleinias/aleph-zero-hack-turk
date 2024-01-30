@@ -8,7 +8,7 @@ import { toast } from 'react-hot-toast'
 import { HomePageTitle } from '@/app/components/home-page-title'
 import { ChainInfo } from '@/components/web3/chain-info'
 import { ConnectButton } from '@/components/web3/connect-button'
-import { GreeterContractInteractions } from '@/components/web3/greeter-contract-interactions'
+import { GreeterContractInteractions } from '@/components/web3/zkTurk-contract-interactions'
 
 export default function HomePage() {
   // Display `useInkathon` error messages (optional)
@@ -31,7 +31,7 @@ export default function HomePage() {
           {/* Chain Metadata Information */}
           <ChainInfo />
 
-          {/* Greeter Read/Write Contract Interactions */}
+          {/* ZkTurk Read/Write Contract Interactions */}
           <GreeterContractInteractions />
         </div>
       </div>

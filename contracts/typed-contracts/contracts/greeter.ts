@@ -4,12 +4,12 @@ import type { ApiPromise } from '@polkadot/api';
 import { Abi } from '@polkadot/api-contract';
 import type { KeyringPair } from '@polkadot/keyring/types';
 import { ContractPromise } from '@polkadot/api-contract';
-import { ContractAbi } from '../contract-info/greeter';
-import QueryMethods from '../query/greeter';
-import BuildExtrinsicMethods from '../build-extrinsic/greeter';
-import TxSignAndSendMethods from '../tx-sign-and-send/greeter';
-import MixedMethods from '../mixed-methods/greeter';
-import EventsClass from '../events/greeter';
+import { ContractAbi } from '../contract-info/zkTurk';
+import QueryMethods from '../query/zkTurk';
+import BuildExtrinsicMethods from '../build-extrinsic/zkTurk';
+import TxSignAndSendMethods from '../tx-sign-and-send/zkTurk';
+import MixedMethods from '../mixed-methods/zkTurk';
+import EventsClass from '../events/zkTurk';
 
 
 export default class Contract {
