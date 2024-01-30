@@ -1,4 +1,5 @@
 use ink::prelude::string::String;
+use crate::ZkTurkError;
 use ink::{
     prelude::{vec, vec::Vec},
     primitives::AccountId,
@@ -7,23 +8,21 @@ use ink::{
 use ink::env::call::{build_call, ExecutionInput, Selector};
 use ink::env::DefaultEnvironment;
 
-pub enum PSP22Event {
-    Transfer {
-        from: Option<AccountId>,
-        to: Option<AccountId>,
-        value: u128,
-    },
-    Approval {
-        owner: AccountId,
-        spender: AccountId,
-        amount: u128,
+
+pub enum ProblemsDataEvent {
+    JoinProblem {
+        problemId: u128,
+        worker: AccountId,
     },
 }
 
 #[ink::storage_item]
 #[derive(Debug, Default)]
 pub struct ProblemsData {
+    // --- Problem immutable data. ---
+    // Total problems.
     count: u128,
+    // Per problem storage.
     owners: Mapping<u128, AccountId>,
     titles: Mapping<u128, String>,
     descriptions: Mapping<u128, String>,
@@ -33,6 +32,8 @@ pub struct ProblemsData {
     outdatedAfters: Mapping<u128, u128>,
     taskUrlss: Mapping<u128, Vec<String>>,
     answerss: Mapping<u128, Vec<String>>,
+    // --- Problem mutable data. ---
+    problemWorkersCountss: Mapping<u128, u128>,
 }
 
 impl ProblemsData {
@@ -48,6 +49,7 @@ impl ProblemsData {
             outdatedAfters: Default::default(),
             taskUrlss: Default::default(),
             answerss: Default::default(),
+            problemWorkersCountss: Default::default(),
         };
         data
     }
@@ -60,7 +62,9 @@ impl ProblemsData {
         workersMax: u128,
         taskPriceWei: u128,
         lockedUntil: u128,
-        outdatedAfter: u128
+        outdatedAfter: u128,
+        taskUrls: Vec<String>,
+        answers: Vec<String>,
     ) -> u128 {
         let newId = self.count + 1;
         let new_count = self.count + 1;
@@ -73,10 +77,26 @@ impl ProblemsData {
         self.taskPriceWeis.insert(newId, &(taskPriceWei));
         self.lockedUntils.insert(newId, &(lockedUntil));
         self.outdatedAfters.insert(newId, &(outdatedAfter));
+        self.taskUrlss.insert(newId, &(taskUrls));
+        self.answerss.insert(newId, &(answers));
+        self.problemWorkersCountss.insert(newId, &(0));
         
-        // TODO event...
-
+        // TODO: emit event if frontend needed it...
         newId
+    }
+
+    pub fn joinProblem(
+        &mut self,
+        problemId: u128,
+        worker: AccountId,
+    ) -> Result<Vec<ProblemsDataEvent>, ZkTurkError> {
+        let problemWorkersCountsNew = self.problemWorkersCountss.get(problemId).unwrap_or_default() + 1;
+        self.problemWorkersCountss.insert(problemId, &(problemWorkersCountsNew));
+
+        Ok(vec![ProblemsDataEvent::JoinProblem {
+            problemId: problemId,
+            worker: worker,
+        }])
     }
 
     /// Returns problem counter.
@@ -113,4 +133,8 @@ impl ProblemsData {
     pub fn answers(&self, problemId: u128) -> Option<Vec<String>> {
         self.answerss.get(problemId)
     }
+    pub fn problemWorkersCounts(&self, problemId: u128) -> Option<u128> {
+        self.problemWorkersCountss.get(problemId)
+    }
+
 }
